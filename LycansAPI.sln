@@ -5,7 +5,7 @@ VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LycansAPI.Core", "LycansAPI.Core\LycansAPI.Core.csproj", "{0105003D-265D-4313-B75A-A376ACF61D7D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LycansAPI.Localization", "LycansAPI.Localization\LycansAPI.Localization.csproj", "{7A758BD8-07EC-4F53-8341-8A29115DBFDB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LycansAPI.Localization", "LycansAPI.Localization\LycansAPI.Localization.csproj", "{7A758BD8-07EC-4F53-8341-8A29115DBFDB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

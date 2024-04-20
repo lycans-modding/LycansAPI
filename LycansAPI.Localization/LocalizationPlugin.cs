@@ -12,8 +12,13 @@ public class LocalizationPlugin : BaseUnityPlugin
     public const string PLUGIN_NAME = LMAPI.PLUGIN_NAME + ".Localization";
     public const string PLUGIN_VERSION = LMAPI.PLUGIN_VERSION;
 
-    private void Awake()
+    private void OnEnable()
     {
-        Log.Info("API Localization => OK");
+        LocalizationAPI.Hook();
+    }
+
+    private void OnDisable()
+    {
+        LocalizationAPI.Unhook();
     }
 }
