@@ -20,16 +20,16 @@ Pour ajouter une traduction en français et en anglais il faut :
 fr.json :
 ```json
 {
-	"CLE_UNIQUE_1": "Ma traduction en français",
-	"CLE_UNIQUE_2": "Une autre traduction"
+    "CLE_UNIQUE_1": "Ma traduction en français",
+    "CLE_UNIQUE_2": "Une autre traduction"
 }
 ```
 
 en.json :
-```
+```json
 {
-	"CLE_UNIQUE_1": "My English translation",
-	"CLE_UNIQUE_2": "Another translation"
+    "CLE_UNIQUE_1": "My English translation",
+    "CLE_UNIQUE_2": "Another translation"
 }
 ```
 
