@@ -36,5 +36,14 @@ en.json :
 Il est possible d'ajouter une traduction à la volée en faisant appel à la fonction suivante :
 
 ```cs
-LocalizationAPI.AddRecord(<langue>, "<CLE_UNIQUE>", "Valeur en jeu");
+LocalizationAPI.AddRecord("fr", "CLE_UNIQUE_1", "Ma traduction en français");
+// Le "true" à la fin permet de recharger les traductions en jeu
+LocalizationAPI.AddRecord("fr", "CLE_UNIQUE_2", "Une autre traduction", true);
+```
+
+Il est également possible d'ajouter un texte générique qui est tout le temps chargé, peu importe la langue soit en créant
+le fichier json "generic.json" soit en utilisant la fonction suivante :
+
+```cs
+LocalizationAPI.AddRecord("CLE_UNIQUE_3", "Chaîne générique qui ne sera pas traduite");
 ```

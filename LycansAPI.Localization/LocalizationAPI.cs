@@ -15,6 +15,7 @@ public static class LocalizationAPI
 {
     private readonly static Dictionary<string, Dictionary<string, string>> _translationDicts = new();
     private const string STRING_TABLE = "UI Text";
+    private const string GENERIC_LANG = "generic";
 
     /// <summary>
     /// Ajoute une nouvelle entrée dans la table de langues pour une langue spécifique.
@@ -46,7 +47,7 @@ public static class LocalizationAPI
         }
 
         if (reloadTranslation)
-            ReloadLocalizationForSelectedLocale(LocalizationSettings.SelectedLocale);
+            ReloadLocalization(LocalizationSettings.SelectedLocale);
     }
 
     /// <summary>
@@ -55,30 +56,35 @@ public static class LocalizationAPI
     /// <param name="uniqueKey">Clé unique à l'application qui identifie la traduction.</param>
     /// <param name="translation">Texte traduit, tel qu'il sera affiché en jeu.</param>
     public static void AddEntry(string uniqueKey, string translation)
-        => AddEntry("generic", uniqueKey, translation);
+        => AddEntry(GENERIC_LANG, uniqueKey, translation);
 
     internal static void Hook()
     {
         LoadTranslationFiles();
-        ReloadLocalizationForSelectedLocale(LocalizationSettings.SelectedLocale);
+        ReloadLocalization(LocalizationSettings.SelectedLocale);
+        ReloadLocalization(GENERIC_LANG);
         LocalizationSettings.SelectedLocaleChanged += LocalizationSettings_SelectedLocaleChanged;
     }
 
     internal static void Unhook()
     {
         LocalizationSettings.SelectedLocaleChanged -= LocalizationSettings_SelectedLocaleChanged;
-        UnloadCurrentLocalization();
+        UnloadLocalization(GENERIC_LANG);
+        UnloadLocalization(LocalizationSettings.SelectedLocale);
         _translationDicts.Clear();
     }
 
     private static void LocalizationSettings_SelectedLocaleChanged(Locale locale)
     {
-        ReloadLocalizationForSelectedLocale(locale);
+        ReloadLocalization(locale);
+        ReloadLocalization(GENERIC_LANG);
     }
 
-    private static void ReloadLocalizationForSelectedLocale(Locale locale)
+    private static void ReloadLocalization(Locale locale)
+        => ReloadLocalization(locale.Identifier.Code.ToLower());
+
+    private static void ReloadLocalization(string lang)
     {
-        var lang = locale.Identifier.Code.ToLower();
         var table = LocalizationSettings.StringDatabase.GetTable(STRING_TABLE);
 
         if (_translationDicts.TryGetValue(lang, out var translationDict))
@@ -94,12 +100,14 @@ public static class LocalizationAPI
         }
     }
 
-    private static void UnloadCurrentLocalization()
+    private static void UnloadLocalization(Locale locale)
+        => UnloadLocalization(locale.Identifier.Code.ToLower());
+
+    private static void UnloadLocalization(string lang)
     {
         // Dans le cas où on décharge l'api quand on quitte le jeu
         if (LocalizationSettings.SelectedLocale == null) return;
 
-        var lang = LocalizationSettings.SelectedLocale.Identifier.Code.ToLower();
         var table = LocalizationSettings.StringDatabase.GetTable(STRING_TABLE);
 
         if (_translationDicts.TryGetValue(lang, out var translationDict))
