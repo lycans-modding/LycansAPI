@@ -13,6 +13,10 @@ namespace LycansAPI.Localization;
 
 public static class LocalizationAPI
 {
+    public const string PLUGIN_GUID = LMAPI.PLUGIN_GUID + ".localization";
+    public const string PLUGIN_NAME = LMAPI.PLUGIN_NAME + ".Localization";
+    public const string PLUGIN_VERSION = LMAPI.PLUGIN_VERSION;
+
     private readonly static Dictionary<string, Dictionary<string, string>> _translationDicts = new();
     private const string STRING_TABLE = "UI Text";
     private const string GENERIC_LANG = "generic";

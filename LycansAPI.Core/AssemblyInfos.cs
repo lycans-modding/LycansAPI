@@ -4,3 +4,4 @@
 // [assembly: IVT("LycansAPI.<nom>")]
 
 [assembly: IVT("LycansAPI.Localization")]
+[assembly: IVT("LycansAPI.State")]

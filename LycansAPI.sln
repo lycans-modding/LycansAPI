@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LycansAPI.Core", "LycansAPI
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LycansAPI.Localization", "LycansAPI.Localization\LycansAPI.Localization.csproj", "{7A758BD8-07EC-4F53-8341-8A29115DBFDB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LycansAPI.State", "LycansAPI.State\LycansAPI.State.csproj", "{4E85B218-B302-468B-9A71-2C8353C830B1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{7A758BD8-07EC-4F53-8341-8A29115DBFDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A758BD8-07EC-4F53-8341-8A29115DBFDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A758BD8-07EC-4F53-8341-8A29115DBFDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E85B218-B302-468B-9A71-2C8353C830B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E85B218-B302-468B-9A71-2C8353C830B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E85B218-B302-468B-9A71-2C8353C830B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E85B218-B302-468B-9A71-2C8353C830B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
