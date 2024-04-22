@@ -10,11 +10,11 @@ public class LocalizationPlugin : BaseUnityPlugin
 {
     private void OnEnable()
     {
-        LocalizationAPI.Hook();
+        LocalizationAPI.Instance.Hook();
     }
 
     private void OnDisable()
     {
-        LocalizationAPI.Unhook();
+        LocalizationAPI.Instance.Unhook();
     }
 }

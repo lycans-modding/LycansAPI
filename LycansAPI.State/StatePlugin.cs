@@ -10,12 +10,12 @@ public class StatePlugin : BaseUnityPlugin
 {
     private void OnEnabled()
     {
-        StateAPI.Hook();
+        StateAPI.Instance.Hook();
     }
 
     private void OnDisabled()
     {
-        StateAPI.Unhook();
+        StateAPI.Instance.Unhook();
     }
 
 }

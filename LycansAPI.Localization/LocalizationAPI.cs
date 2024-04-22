@@ -11,13 +11,23 @@ using UnityEngine.Localization.Settings;
 
 namespace LycansAPI.Localization;
 
-public static class LocalizationAPI
+public class LocalizationAPI
 {
     public const string PLUGIN_GUID = LMAPI.PLUGIN_GUID + ".localization";
     public const string PLUGIN_NAME = LMAPI.PLUGIN_NAME + ".Localization";
     public const string PLUGIN_VERSION = LMAPI.PLUGIN_VERSION;
 
-    private readonly static Dictionary<string, Dictionary<string, string>> _translationDicts = new();
+    internal static LocalizationAPI Instance
+    {
+        get
+        {
+            _instance ??= new LocalizationAPI();
+            return _instance;
+        }
+    }
+
+    private static LocalizationAPI? _instance;
+    private readonly Dictionary<string, Dictionary<string, string>> _translationDicts = new();
     private const string STRING_TABLE = "UI Text";
     private const string GENERIC_LANG = "generic";
 
@@ -30,7 +40,7 @@ public static class LocalizationAPI
     /// <param name="reloadTranslation">Si "True", recharge l'ensemble des traductions dynamiquement.</param>
     public static void AddEntry(string lang,  string uniqueKey, string translation, bool reloadTranslation = false)
     {
-        if (_translationDicts.TryGetValue(lang, out var translationDict))
+        if (Instance._translationDicts.TryGetValue(lang, out var translationDict))
         {
             try
             {
@@ -44,14 +54,14 @@ public static class LocalizationAPI
         }
         else
         {
-            _translationDicts.Add(lang, new()
+            Instance._translationDicts.Add(lang, new()
             {
                 { uniqueKey, translation }
             });
         }
 
         if (reloadTranslation)
-            ReloadLocalization(LocalizationSettings.SelectedLocale);
+            Instance.ReloadLocalization(LocalizationSettings.SelectedLocale);
     }
 
     /// <summary>
@@ -62,7 +72,7 @@ public static class LocalizationAPI
     public static void AddEntry(string uniqueKey, string translation)
         => AddEntry(GENERIC_LANG, uniqueKey, translation);
 
-    internal static void Hook()
+    internal void Hook()
     {
         LoadTranslationFiles();
         ReloadLocalization(LocalizationSettings.SelectedLocale);
@@ -70,7 +80,7 @@ public static class LocalizationAPI
         LocalizationSettings.SelectedLocaleChanged += LocalizationSettings_SelectedLocaleChanged;
     }
 
-    internal static void Unhook()
+    internal void Unhook()
     {
         LocalizationSettings.SelectedLocaleChanged -= LocalizationSettings_SelectedLocaleChanged;
         UnloadLocalization(GENERIC_LANG);
@@ -78,16 +88,16 @@ public static class LocalizationAPI
         _translationDicts.Clear();
     }
 
-    private static void LocalizationSettings_SelectedLocaleChanged(Locale locale)
+    private void LocalizationSettings_SelectedLocaleChanged(Locale locale)
     {
         ReloadLocalization(locale);
         ReloadLocalization(GENERIC_LANG);
     }
 
-    private static void ReloadLocalization(Locale locale)
+    private void ReloadLocalization(Locale locale)
         => ReloadLocalization(locale.Identifier.Code.ToLower());
 
-    private static void ReloadLocalization(string lang)
+    private void ReloadLocalization(string lang)
     {
         var table = LocalizationSettings.StringDatabase.GetTable(STRING_TABLE);
 
@@ -104,10 +114,10 @@ public static class LocalizationAPI
         }
     }
 
-    private static void UnloadLocalization(Locale locale)
+    private void UnloadLocalization(Locale locale)
         => UnloadLocalization(locale.Identifier.Code.ToLower());
 
-    private static void UnloadLocalization(string lang)
+    private void UnloadLocalization(string lang)
     {
         // Dans le cas où on décharge l'api quand on quitte le jeu
         if (LocalizationSettings.SelectedLocale == null) return;
@@ -123,7 +133,7 @@ public static class LocalizationAPI
         }
     }
 
-    private static void LoadTranslationFile(string filePath)
+    private void LoadTranslationFile(string filePath)
     {
         var lang = Path.GetFileNameWithoutExtension(filePath);
         var json = File.ReadAllText(filePath);
@@ -135,7 +145,7 @@ public static class LocalizationAPI
             .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
     }
 
-    private static void LoadTranslationFiles()
+    private void LoadTranslationFiles()
     {
         var translationFiles = GetTranslationFiles();
 
@@ -150,7 +160,7 @@ public static class LocalizationAPI
         }
     }
 
-    private static List<string> GetTranslationFiles()
+    private List<string> GetTranslationFiles()
     {
         try
         {
