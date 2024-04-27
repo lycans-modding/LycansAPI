@@ -29,20 +29,20 @@ son fonctionnement.
 ```cs
 StateAPI.AddPreEnterHook(GameState.EGameState.Play, (GameState instance, GameState.EGameState previousState) => 
 {
-	Log.Info("Je m'exécute AVANT le code du jeu quand on rentre dans un round de jeu");
+    Log.Info("Je m'exécute AVANT le code du jeu quand on rentre dans un round de jeu");
 
-	if (instance.Runner.IsServer)
-	{
-		Log.Info("Je suis exécuté uniquement par le serveur");
-	}
+    if (instance.Runner.IsServer)
+    {
+        Log.Info("Je suis exécuté uniquement par le serveur");
+    }
 
-	if (instance.Runner.IsPlayer)
-	{
-		Log.Info("Je suis exécuté par un joueur");
-	}
+    if (instance.Runner.IsPlayer)
+    {
+        Log.Info("Je suis exécuté par un joueur");
+    }
 
-	// Ne passe pas l'exécution du code du jeu
-	return false;
+    // Ne passe pas l'exécution du code du jeu
+    return false;
 });
 ```
 
@@ -54,16 +54,16 @@ des valeurs ou alors en ajoutant de nouveaux comportements.
 ```cs
 StateAPI.AddPostExitHook(GameState.EGameState.Meeting, (GameState instance, GameState.EGameState previousState) => 
 {
-	Log.Info("Je m'exécute APRÈS le code du jeu quand on quitte un vote");
+    Log.Info("Je m'exécute APRÈS le code du jeu quand on quitte un vote");
 
-	if (instance.Runner.IsServer)
-	{
-		Log.Info("Je suis exécuté uniquement par le serveur");
-	}
+    if (instance.Runner.IsServer)
+    {
+        Log.Info("Je suis exécuté uniquement par le serveur");
+    }
 
-	if (instance.Runner.IsPlayer)
-	{
-		Log.Info("Je suis exécuté par un joueur");
-	}
+    if (instance.Runner.IsPlayer)
+    {
+        Log.Info("Je suis exécuté par un joueur");
+    }
 });
 ```
