@@ -62,7 +62,7 @@ internal class MyNetworkedComponent : NetworkBehaviour
 }
 ```
 
-```
+```cs
 // Fichier : MyPlugin.cs
 
 // <headers requis>
@@ -85,7 +85,7 @@ public class MyPlugin : BaseUnityPlugin
 }
 ```
 
-```
+```cs
 // Ailleurs dans le code...
 // Par exemple dans un patch de la méthode GameManager.Spawned
 
