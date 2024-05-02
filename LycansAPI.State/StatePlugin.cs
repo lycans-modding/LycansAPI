@@ -8,12 +8,12 @@ namespace LycansAPI.State;
 [BepInProcess("Lycans.exe")]
 public class StatePlugin : BaseUnityPlugin
 {
-    private void OnEnabled()
+    private void OnEnable()
     {
         StateAPI.Instance.Hook();
     }
 
-    private void OnDisabled()
+    private void OnDisable()
     {
         StateAPI.Instance.Unhook();
     }
