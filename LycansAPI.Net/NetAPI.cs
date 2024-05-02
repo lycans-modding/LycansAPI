@@ -53,6 +53,7 @@ public class NetAPI
             return null;
         }
 
+        Instance._networkedPrefabs.Add(uniqueKey, id);
         return id;
     }
 
