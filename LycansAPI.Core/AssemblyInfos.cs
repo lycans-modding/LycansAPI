@@ -6,3 +6,4 @@
 [assembly: IVT("LycansAPI.Localization")]
 [assembly: IVT("LycansAPI.State")]
 [assembly: IVT("LycansAPI.Net")]
+[assembly: IVT("LycansAPI.UI")]
